@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "incremental": true,            /* Enable incremental compilation */
     "target": "es5",                /* Specify ECMAScript target version: */
     "module": "commonjs",           /* 'none', 'commonjs', 'amd', 'system', etc */

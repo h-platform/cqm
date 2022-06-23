@@ -1,20 +1,29 @@
 {
-  "name": "@hplate/hcqm",
-  "version": "0.0.1",
-  "description": "This packages indentify the basics of the cqm module",
+  "name": "@h-platform/cqm",
+  "version": "0.0.2",
+  "description": "This package eastablish the basics of the cq api (command query api) for h-platform",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc"
   },
   "keywords": [],
-  "author": "Yasir",
+  "author": "Yasir Hantoush",
   "license": "MIT",
   "dependencies": {
     "@nestjs/common": "^8.4.7",
-    "axios": "^0.27.2"
+    "axios": "^0.27.2",
+    "class-validator": "^0.13.2"
   },
   "devDependencies": {
     "typescript": "^4.3.4"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/h-platform/cqm.git"
   }
 }
