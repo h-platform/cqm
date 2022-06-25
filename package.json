@@ -1,6 +1,6 @@
 {
   "name": "@h-platform/cqm",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "This package eastablish the basics of the cq api (command query api) for h-platform",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
