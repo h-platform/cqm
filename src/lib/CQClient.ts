@@ -30,7 +30,11 @@ export class CQClient {
         if (this.options.token) {
             return this.options.token
         } else if (this.options.useLocalStorage) {
-            return window?.localStorage?.getItem(this.options.localStoragePath || 'token')
+            if (typeof window !== 'undefined' && window.localStorage) {
+                return window?.localStorage?.getItem(this.options.localStoragePath || 'token')
+            } else {
+                return null;
+            }
         } else return null;
     }
 
