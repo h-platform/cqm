@@ -18,9 +18,12 @@ export class CQClient {
 
     constructor(
         private readonly baseUrl,
-        _options: CQClientOptions,
+        providedOptions: CQClientOptions = defaultCQClientOptions,
     ) {
-        this.options = { ..._options }
+        this.options = {
+            ...defaultCQClientOptions, 
+            ...providedOptions
+        }
     }
 
     getToken() {
