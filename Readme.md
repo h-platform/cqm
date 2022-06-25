@@ -1,16 +1,14 @@
 ## CQClient
 
-CQClient is a typescript class which wraps http axios and expose two functions
+CQClient is a wrapper class around http axios. It is warps axios and expose two functions instead:
 
 - Command: for changing system state which results in side effects such as updateing your database
 - Query: for retreiving data such as find and findAll operations
 
-This simplifies the communication with the server as no need to think about request methods types POST, GET, PATCH, DELETE, PUT.
-
-All rest api calls are executed using POST methods internally using axios.
+This simplifies the communication with the server. No need to think about request methods anymore like POST, GET, PATCH, DELETE, PUT. All rest api calls are executed using http POST method only.
 
 ## Philosiphy
-Expressing your api this way will be more clear and directly linked to the intended purpose. The api will be more elaborate and self explanatory. The name of the command / query should convey a strong meaning for users leaving no room for guessing. Eventually you will build your own domain language that can be easily read and absorbed by your consumers.
+Expressing your api should be more clear and directly linked to the intended purpose. The api should be more elaborate and self explanatory. Seperating the operations into  two types command and query gives a direct meaning of the intention of the declared api. Giving specific names for commands and queries gives a strong meaning leaving no room for guessing. Eventually you will build your own domain language that can be easily read and absorbed by your consumers.
 
 ## Client Side:
 
@@ -30,7 +28,7 @@ const post = await cqClient.query('blog', 'post.findById', { id: 1 });
 const comments = await cqClient.query('blog', 'post.findComments', { postId: 1 });
 ```
 
-The first parameter for the command is called the moduleName. Relative commands and queries shoudl be grouped in a module. The second parameter is the topic name of the command, the third parameter is the payload object to be sent to the server for processing. The same goes for the query.
+The first parameter for the command is called the moduleName. Relative commands and queries should be grouped together in a module. The second parameter is the topic name of the command, the third parameter is the payload object to be sent to the server for processing. The same goes for the query.
 
 ```
 CQClient.command(moduleName: string, commandName: string, payload: any);
@@ -55,7 +53,7 @@ POST /api/blog/queries/post.findComments
 ```
 
 
-Response body from the server expected to match the CommandResponse:
+Response body from the server expected to match the CommandResponse class:
 ```
 {
     success: true,
@@ -68,7 +66,7 @@ Response body from the server expected to match the CommandResponse:
 }
 ```
 
-To make it easier to generate such response, you can use CommandResponse helper:
+To make it easier to generate such response, you can use CommandResponse helper in server code:
 
 
 ```
@@ -76,7 +74,7 @@ return CommandResponse.success('Post created successfully', 'POST_CREATED', {});
 ```
 
 
-This is a sample express server with typescript using CommandResponse static helpers:
+This is a sample express server with typescript using CommandResponse helpers functions:
 
 ```
 import express, { Express, Request, Response } from 'express';
@@ -85,7 +83,7 @@ import { CommandResponse } from '@h-platform/cqm';
 const app: Express = express();
 const port = process.env.PORT;
 
-app.get('/api/blog/commands/post.create', (req: Request, res: Response) => {
+app.post('/api/blog/commands/post.create', (req: Request, res: Response) => {
     // some logic for creating the post goes here
     
     if (everyThingIsOk) {
