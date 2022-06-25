@@ -1,18 +1,42 @@
 import axios from 'axios';
 import { CommandResponse } from './CommandResponse';
 
+export class CQClientOptions {
+    token?: string;
+    useLocalStorage: boolean;
+    localStoragePath: string;
+}
+
+const defaultCQClientOptions: CQClientOptions = {
+    token: null,
+    useLocalStorage: true,
+    localStoragePath: 'token',
+}
+
 export class CQClient {
+    options: CQClientOptions = { ...defaultCQClientOptions };
+
     constructor(
         private readonly baseUrl,
-        private readonly token,
-    ) { }
+        _options: CQClientOptions,
+    ) {
+        this.options = { ..._options }
+    }
+
+    getToken() {
+        if (this.options.token) {
+            return this.options.token
+        } else if (this.options.useLocalStorage) {
+            return window?.localStorage?.getItem(this.options.localStoragePath || 'token')
+        } else return null;
+    }
 
     async command<T>(module: string, command: string, payload: any): Promise<CommandResponse<any>> {
         try {
             const { data } = await axios.post<CommandResponse<any>>(`${this.baseUrl}/${module}/commands/${command}`, payload, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.token}`,
+                    'Authorization': `Bearer ${this.getToken()}`,
                 }
             })
             return data as CommandResponse<T>;
@@ -26,7 +50,7 @@ export class CQClient {
             const { data } = await axios.post(`${this.baseUrl}/${module}/queries/${query}`, payload, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.token}`,
+                    'Authorization': `Bearer ${this.getToken()}`,
                 }
             })
             return data;
@@ -40,7 +64,7 @@ export class CQClient {
             const response = await axios.post<T>(`${this.baseUrl}/${url}`, payload, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.token}`,
+                    'Authorization': `Bearer ${this.getToken()}`,
                 }
             })
             return response.data as T
