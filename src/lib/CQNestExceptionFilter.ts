@@ -6,17 +6,17 @@ import {
     HttpStatus,
 } from '@nestjs/common';
 import { ValidationError } from 'class-validator';
-import { CommandError } from './CommandResponse';
+import { CommandError } from './CommandError';
 
 @Catch()
 export class CQExceptionsFilter implements ExceptionFilter {
     catch(exception: unknown, host: ArgumentsHost) {
         const ctx = host.switchToHttp();
         const response = ctx.getResponse();
-        let commandError: CommandError<any>;
+        let commandError: CommandError;
 
         if (exception instanceof CommandError) {
-            commandError = exception as CommandError<any>;
+            commandError = exception as CommandError;
         } else if (exception instanceof HttpException) {
             const httpException = exception as HttpException;
             const response = httpException.getResponse();
