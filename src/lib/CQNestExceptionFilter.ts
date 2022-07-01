@@ -15,7 +15,13 @@ export class CQExceptionsFilter implements ExceptionFilter {
         const response = ctx.getResponse();
         let commandError: CommandError;
 
-        if (exception instanceof CommandError) {
+        if (typeof exception == 'object' 
+            && Object.keys(exception).includes('success')
+            && Object.keys(exception).includes('message')
+            && Object.keys(exception).includes('code')
+        ) {
+            commandError = exception as any;
+        } else if (exception instanceof CommandError) {
             commandError = exception as CommandError;
         } else if (exception instanceof HttpException) {
             const httpException = exception as HttpException;
@@ -25,7 +31,7 @@ export class CQExceptionsFilter implements ExceptionFilter {
         } else if (Array.isArray(exception) && exception[0] instanceof ValidationError) {
             commandError = new CommandError('Invalid payload ،،،!', 'VALIDATION_ERROR', exception);
         } else if ((exception as any).message) {
-            commandError = new CommandError((exception as any).message, 'ERROR', exception);
+            commandError = new CommandError((exception as any).message, (exception as any).code || 'UNKNOWN_ERROR', exception);
         } else {
             commandError = new CommandError('Unkown error occired ،،،!', 'UNSPECIFIED_ERROR');
         }

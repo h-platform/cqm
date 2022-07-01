@@ -10,7 +10,6 @@
     "skipLibCheck": true,           /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true, /* Disallow inconsistently */
     "lib": ["es2017", "es7", "es6", "dom"],
-    
   },
   "include": [
     "src"
