@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { CommandResponse } from './CommandResponse';
 
+export interface HModuleConfigs {
+    moduleName: string;
+    commands: Record<string, any>;
+    queries: Record<string, any>;
+}
+
 export class CQClientOptions {
     token?: string;
     useLocalStorage: boolean;
