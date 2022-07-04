@@ -2,7 +2,7 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 import { CommandResponse } from './CommandResponse';
 
 export class CommandError extends HttpException {
-    success: true;
+    success: boolean = false;
     
     constructor(readonly message: string, readonly code: string, readonly data: any = {}) {
         super(CommandResponse.error(message, code, data), HttpStatus.INTERNAL_SERVER_ERROR);

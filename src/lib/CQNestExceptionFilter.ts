@@ -15,7 +15,7 @@ export class CQExceptionsFilter implements ExceptionFilter {
         const response = ctx.getResponse();
         let commandError: CommandError;
 
-        if (typeof exception == 'object' 
+        if (exception && typeof exception == 'object' 
             && Object.keys(exception).includes('success')
             && Object.keys(exception).includes('message')
             && Object.keys(exception).includes('code')

@@ -1,6 +1,6 @@
 {
   "name": "@h-platform/cqm",
-  "version": "0.0.11",
+  "version": "0.0.18",
   "description": "This package defined core classes for commands and queries client for h-platform (CQClient)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,7 +11,6 @@
   "author": "Yasir Hantoush",
   "license": "MIT",
   "dependencies": {
-    "@nestjs/common": "^8.4.7",
     "axios": "^0.27.2",
     "class-validator": "^0.13.2"
   },
@@ -20,6 +19,9 @@
     "jest": "^28.1.1",
     "ts-jest": "^28.0.5",
     "typescript": "^4.3.4"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^8.4.7"
   },
   "publishConfig": {
     "access": "public",

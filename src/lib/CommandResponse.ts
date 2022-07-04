@@ -1,8 +1,8 @@
 export class CommandResponse<T> {
-    success: boolean;
-    message: string;
-    code: string;
-    data: T;
+    success: boolean = true;
+    message: string = '';
+    code: string = '';
+    data: T = {} as T;
 
     static error<T>(message: string, code: string, data: T = {} as T): CommandResponse<T> {
         return {

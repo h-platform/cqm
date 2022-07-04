@@ -7,8 +7,8 @@ export interface HModuleConfigs {
     queries: Record<string, any>;
 }
 
-export class CQClientOptions {
-    token?: string;
+export type CQClientOptions = {
+    token: string | null;
     useLocalStorage: boolean;
     localStoragePath: string;
 }
@@ -23,11 +23,11 @@ export class CQClient {
     options: CQClientOptions = { ...defaultCQClientOptions };
 
     constructor(
-        private readonly baseUrl,
+        private readonly baseUrl: string,
         providedOptions: CQClientOptions = defaultCQClientOptions,
     ) {
         this.options = {
-            ...defaultCQClientOptions, 
+            ...defaultCQClientOptions,
             ...providedOptions
         }
     }
