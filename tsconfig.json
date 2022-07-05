@@ -2,14 +2,14 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "incremental": true,            /* Enable incremental compilation */
-    "target": "es5",                /* Specify ECMAScript target version: */
-    "module": "esnext",           /* 'none', 'commonjs', 'amd', 'system', etc */
+    "target": "ES2015",                /* Specify ECMAScript target version: */
+    "module": "CommonJS",           /* 'none', 'commonjs', 'amd', 'system', etc */
     "declaration": true,            /* Concatenate & emit output to single file.*/
     "outDir": "dist",                /* Redirect output to the directory. */
     "esModuleInterop": true,        /* Enables intero between CommonJS and ES */
     "skipLibCheck": true,           /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true, /* Disallow inconsistently */
-    "lib": ["esnext", "dom"],
+    "lib": ["ES2015", "dom"],
     "moduleResolution": "node",
     "strict": true,
   },
