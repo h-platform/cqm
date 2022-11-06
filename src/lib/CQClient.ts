@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { CommandResponse } from './CommandResponse';
+import { handleAxiosError } from './handle-axios-error';
 
 export interface HModuleConfigs {
     moduleName: string;
@@ -87,11 +88,7 @@ export class CQClient {
     }
 
     handleError(err: any) {
-        if (err.isAxiosError) {
-            return err.response.data
-        } else {
-            return err
-        }
+        return CommandResponse.error('CQClient Request Failed', 'CQClientError', handleAxiosError(err));
     }
 }
 
