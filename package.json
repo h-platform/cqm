@@ -1,6 +1,6 @@
 {
   "name": "@h-platform/cqm",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "description": "This package defined core classes for commands and queries client for h-platform (CQClient)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
