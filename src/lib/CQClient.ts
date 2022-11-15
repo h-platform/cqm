@@ -12,12 +12,14 @@ export type CQClientOptions = {
     token: string | null;
     useLocalStorage: boolean;
     localStoragePath: string;
+    timeout:  number;
 }
 
 const defaultCQClientOptions: CQClientOptions = {
     token: null,
     useLocalStorage: true,
     localStoragePath: 'token',
+    timeout: 2000,
 }
 
 export class CQClient {
@@ -51,7 +53,8 @@ export class CQClient {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${this.getToken()}`,
-                }
+                },
+                timeout: this.options.timeout,
             })
             return data as CommandResponse<T>;
         } catch (err) {
@@ -65,7 +68,8 @@ export class CQClient {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${this.getToken()}`,
-                }
+                },
+                timeout: this.options.timeout,
             })
             return data;
         } catch (err) {
@@ -79,7 +83,8 @@ export class CQClient {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${this.getToken()}`,
-                }
+                },
+                timeout: this.options.timeout,
             })
             return response.data as T
         } catch (err) {
